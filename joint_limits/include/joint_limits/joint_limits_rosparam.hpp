@@ -525,6 +525,10 @@ inline bool check_for_limits_update(
             changed = true;
           }
         }
+        else
+        {
+          changed = true;
+        }
       }
       else if (param_name == param_base_name + ".has_velocity_limits")
       {

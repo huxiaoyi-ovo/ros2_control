@@ -280,6 +280,21 @@ TEST_F(JointLimitsRosParamTest, parse_soft_joint_limits)
   }
 }
 
+TEST_F(JointLimitsRosParamTest, disable_position_limits_reports_update)
+{
+  joint_limits::JointLimits limits;
+  limits.has_position_limits = true;
+  limits.min_position = -1.0;
+  limits.max_position = 1.0;
+
+  const std::vector<rclcpp::Parameter> parameters{
+    rclcpp::Parameter("joint_limits.foo_joint.has_position_limits", false)};
+
+  EXPECT_TRUE(joint_limits::check_for_limits_update(
+    "foo_joint", parameters, node_->get_node_logging_interface(), limits));
+  EXPECT_FALSE(limits.has_position_limits);
+}
+
 class JointLimitsUndeclaredRosParamTest : public ::testing::Test
 {
 public:
