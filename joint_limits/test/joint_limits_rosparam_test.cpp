@@ -290,8 +290,9 @@ TEST_F(JointLimitsRosParamTest, disable_position_limits_reports_update)
   const std::vector<rclcpp::Parameter> parameters{
     rclcpp::Parameter("joint_limits.foo_joint.has_position_limits", false)};
 
-  EXPECT_TRUE(joint_limits::check_for_limits_update(
-    "foo_joint", parameters, node_->get_node_logging_interface(), limits));
+  EXPECT_TRUE(
+    joint_limits::check_for_limits_update(
+      "foo_joint", parameters, node_->get_node_logging_interface(), limits));
   EXPECT_FALSE(limits.has_position_limits);
 }
 
